@@ -1,10 +1,10 @@
 import axios from 'axios';
 
-const BASE_URL = 'http://localhost:4000/api/todos';
+const BASE_URL = 'https://todoservers.onrender.com/api/todos';
 
 export const fetchTodos = async () => {
   try {
-    const response = await axios.get("http://localhost:4000/api/todos");
+    const response = await axios.get("https://todoservers.onrender.com/api/todos");
     console.log(response.data,"response.data");
     return response.data;
   } catch (error) {
@@ -16,7 +16,7 @@ export const fetchTodos = async () => {
 export const addTodoApi = async (text) => {
     console.log(text,"textttt")
   try {
-    const response = await axios.post("http://localhost:4000/api/todos", { title: text, completed: false });
+    const response = await axios.post("https://todoservers.onrender.com/api/todos", { title: text, completed: false });
     console.log(response,"responseresponse")
     return response.data;
   } catch (error) {
