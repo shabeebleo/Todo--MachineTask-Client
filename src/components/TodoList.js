@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import "./TodoList.css";
 import DeleteModal from "./DeleteModal";
 import { HTML5Backend } from "react-dnd-html5-backend";
-import { DndProvider, useDrag, useDrop } from "react-dnd";
+import { DndProvider } from "react-dnd";
 import TodoItem from "./TodoItem";
 
 const TodoList = ({ todos, toggleTodo, deleteTodo }) => {

@@ -67,100 +67,117 @@ const TodoHome = () => {
   return (
     <Router>
       <div
+  style={{
+    display: "flex",
+    flexDirection: "column",
+    alignItems: "center",
+    justifyContent: "flex-start",
+    textAlign: "center",
+    width: "100%",
+    height: "100vh",
+    padding: "10px",
+  }}
+>
+  <div style={{ marginBottom: "20px" }}>
+    <nav>
+      <ul
         style={{
           display: "flex",
-          marginTop: "20px",
-          flexDirection: "column",
-          alignItems: "center",
-          justifyContent: "flex-start",
-          textAlign: "center",
-          width: "100vw",
-          height: "100vh",
+          justifyContent: "center",
+          listStyle: "none",
+          padding: 0,
+          margin: 0,
         }}
       >
-        <div>
-          <nav>
-            <ul style={{ display: "flex" }}>
-              <li>
-                <Link to="/">
-                  {" "}
-                  <span style={{ color: "green", fontSize: "25px" }}>
-                    Home
-                  </span>{" "}
-                </Link>
-              </li>
-              <li>
-                <Link to="/todos">
-                  {" "}
-                  <span style={{ color: "green", fontSize: "25px" }}>
-                    Todos
-                  </span>{" "}
-                </Link>
-              </li>
-              <li>
-                <Link to="/chart">
-                  {" "}
-                  <span style={{ color: "green", fontSize: "25px" }}>
-                    Chart
-                  </span>{" "}
-                </Link>
-              </li>
-              <li>
-                <Link to="/chartForm">
-                  {" "}
-                  <span style={{ color: "green", fontSize: "25px" }}>
-                    Chart-Form
-                  </span>{" "}
-                </Link>
-              </li>
-            </ul>
-          </nav>
+        <li style={{ marginRight: "20px" }}>
+          <Link to="/">
+            <span style={{ color: "green", fontSize: "18px" }}>Home</span>
+          </Link>
+        </li>
+        <li style={{ marginRight: "20px" }}>
+          <Link to="/todos">
+            <span style={{ color: "green", fontSize: "18px" }}>Todos</span>
+          </Link>
+        </li>
+        <li style={{ marginRight: "20px" }}>
+          <Link to="/chart">
+            <span style={{ color: "green", fontSize: "18px" }}>Chart</span>
+          </Link>
+        </li>
+        <li>
+          <Link to="/chartForm">
+            <span style={{ color: "green", fontSize: "18px" ,    marginLeft: "-11px"}}>Chart-Form</span>
+          </Link>
+        </li>
+      </ul>
+    </nav>
+  </div>
+
+  <hr />
+
+  <Routes>
+    <Route
+      path="/"
+      exact
+      element={<h2 style={{ fontSize: "20px" }}>Home</h2>}
+    />
+    <Route
+      path="/chart"
+      element={
+        <Chart
+          chartTitle="Custom Chart Title"
+          backgroundColor="rgba(255, 255, 255, 0.2)"
+          gridLineColor="rgba(128, 128, 128, 0.2)"
+          tooltipsFontSize={14}
+          customTooltipsLabel={(item) => `Value: ${item.value}`}
+        />
+      }
+    />
+    <Route
+      path="/todos"
+      element={
+        <div
+          style={{
+            display: "flex",
+            flexDirection: "column",
+            alignItems: "center",
+            justifyContent: "flex-start",
+            textAlign: "center",
+            width: "100%",
+            height: "100vh",
+            padding: "10px",
+          }}
+        >
+          <h2 style={{ fontSize: "20px" }}>Todos</h2>
+          <TodoForm addTodo={addTodo} />
+          <TodoList
+            todos={todos}
+            toggleTodo={toggleTodo}
+            deleteTodo={deleteTodo}
+          />
         </div>
+      }
+    />
+    <Route path="/chartForm" element={<ChartForm />} />
+  </Routes>
 
-        <hr />
-        <Routes>
-          <Route path="/" exact render={() => <h2>Home</h2>} />
-          <Route
-            path="/chart"
-            element={
-              <Chart
-                chartTitle="Custom Chart Title"
-                backgroundColor="rgba(255, 255, 255, 0.2)"
-                gridLineColor="rgba(128, 128, 128, 0.2)"
-                tooltipsFontSize={14}
-                customTooltipsLabel={(item) => `Value: ${item.value}`}
-              />
-            }
-          />
-          <Route
-            path="/todos"
-            element={
-              <div
-                style={{
-                  display: "flex",
-                  marginTop: "20px",
-                  flexDirection: "column",
-                  alignItems: "center",
-                  justifyContent: "flex-start",
-                  textAlign: "center",
-                  width: "100vw",
-                  height: "100vh",
-                }}
-              >
-                <h2>Todos</h2>
-                <TodoForm addTodo={addTodo} />
-                <TodoList
-                  todos={todos}
-                  toggleTodo={toggleTodo}
-                  deleteTodo={deleteTodo}
-                />
-              </div>
-            }
-          />
+  {/* Media Query for Small Screens */}
+  <style>
+    {`
+      @media only screen and (max-width: 600px) {
+        nav ul {
+          flex-direction: column;
+          align-items: center;
+        }
+        nav li {
+          margin-right: 0;
+          margin-bottom: 10px;
+        }
+      }
+    `}
+  </style>
+</div>;
 
-          <Route path="/chartForm" element={<ChartForm/>}/>
-        </Routes>
-      </div>
     </Router>
   );
 };
